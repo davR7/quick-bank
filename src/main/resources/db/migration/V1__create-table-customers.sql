@@ -1,0 +1,8 @@
+CREATE TABLE customers (
+    id UUID DEFAULT RANDOM_UUID() PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    cpf VARCHAR(255) NOT NULL,
+    email VARCHAR(255) NOT NULL,
+    phone VARCHAR(255) NOT NULL,
+    date_birth DATE NOT NULL
+);
