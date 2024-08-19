@@ -32,6 +32,11 @@ public class Customer extends EntityBase {
     @JoinColumn(name = "date_birth" ,nullable = false)
     private LocalDate dateBirth;
 
+    public Customer(UUID id, String name) {
+        super(id);
+        this.name = name;
+    }
+
     public Customer(UUID id, String name, String cpf, String email, String phone, LocalDate dateBirth) {
         super(id);
         this.name = name;
