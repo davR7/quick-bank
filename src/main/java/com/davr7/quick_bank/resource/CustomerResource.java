@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping(value = "customers")
@@ -30,8 +31,8 @@ public record CustomerResource(CustomerService customerServ, AccountService acco
     }
 
     @GetMapping(value = "/{cpf}")
-    public ResponseEntity<Customer> handleFindCustomerByCpf(@PathVariable String cpf) {
-        Customer data = customerServ.findCustomerByCpf(cpf);
+    public ResponseEntity<DataCustomerDto> handleFindCustomerByCpf(@PathVariable String cpf) {
+        DataCustomerDto data = customerServ.findCustomerByCpf(cpf);
         return ResponseEntity.ok().body(data);
     }
 

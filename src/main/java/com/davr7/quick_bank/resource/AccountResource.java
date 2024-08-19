@@ -1,5 +1,6 @@
 package com.davr7.quick_bank.resource;
 
+import com.davr7.quick_bank.domain.Account;
 import com.davr7.quick_bank.dto.DataAccountDto;
 import com.davr7.quick_bank.service.AccountService;
 import org.springframework.http.ResponseEntity;
@@ -17,8 +18,8 @@ public record AccountResource(AccountService accountServ) {
     }
 
     @GetMapping(value = "/{accNumber}")
-    public ResponseEntity<DataAccountDto> handleFindByAccountNumber(@PathVariable String accNumber) {
-        DataAccountDto data = accountServ.findByAccountNumber(accNumber);
+    public ResponseEntity<Account> handleFindByAccountNumber(@PathVariable String accNumber) {
+        Account data = accountServ.findByAccountNumber(accNumber);
         return ResponseEntity.ok().body(data);
     }
 }
