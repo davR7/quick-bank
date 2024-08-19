@@ -8,6 +8,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.UUID;
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -28,14 +30,11 @@ public class Account extends EntityBase {
     @JoinColumn(nullable = false)
     private Customer owner;
 
-    public Account(String accNumber, AccountType accType, Customer owner) {
-        initialBalance();
+    public Account(UUID id, String accNumber, AccountType accType, Double balance, Customer owner) {
+        super(id);
         this.accNumber = accNumber;
         this.accType = accType;
+        this.balance = balance;
         this.owner = owner;
-    }
-
-    public void initialBalance() {
-        balance = 0.0;
     }
 }
