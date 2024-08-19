@@ -18,19 +18,19 @@ public record CustomerService(CustomerRepository customerRepo) {
         return customers.stream().map(DataCustomerDto::convert).toList();
     }
 
-    public Customer findCustomerByCpf(String cpf) {
+    public DataCustomerDto findCustomerByCpf(String cpf) {
         if (cpf == null) {
             throw new IllegalArgumentException("cpf argument is null");
         }
-        return customerRepo.findByCpf(cpf).orElseThrow(CustomerNotFoundException::new);
+        Customer savedCustomer = customerRepo.findByCpf(cpf).orElseThrow(CustomerNotFoundException::new);
+        return DataCustomerDto.convert(savedCustomer);
     }
 
     public DataCustomerDto createCustomer(CreateCustomerDto dto) {
         customerRepo.findByCpf(dto.cpf()).ifPresent((cpf) -> {
             throw new CustomerExistsException();
         });
-        Customer customer = CreateCustomerDto.toCostumer(dto);
-        Customer savedCustomer = customerRepo.save(customer);
+        Customer savedCustomer = customerRepo.save(CreateCustomerDto.toCostumer(dto));
         return DataCustomerDto.convert(savedCustomer);
     }
 }
